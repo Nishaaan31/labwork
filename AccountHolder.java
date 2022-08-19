@@ -1,68 +1,35 @@
 
-package labday12;
+package AccountHolder;
 
-public class AccountHolder {
-   private int acc_num;
-   private int balance;
-   private String name;
-   
-   AccountHolder()
-   {
-   balance =0;
-   acc_num = 0;
-   name = null;
-   
-   }
-   AccountHolder(int acc_num, String name, int balnce){
-   this.acc_num = acc_num;
-   this.name = name;
-   this.balance = balance;
-   }
+  import java.util.Scanner;
 
-    public int getAcc_num() {
-        return acc_num;
+  public class AccountHolder {
+      
+  static void checkAmount(double a) throws NegativeAmountException{
+        if(a<0) throw new NegativeAmountException(a);
     }
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        double amount;
+        System.out.println("What do you want to do? \n1. Deposit\n2. Withdraw\nEnter your choice(1/2): ");
+        int a = input.nextInt();
+        if(a==1) {
+            System.out.print("Enter your deposit amount: ");
+            amount = input.nextDouble();
+        }
+        else {
+            System.out.printf("Enter your withdraw amount: ");
+            amount = input.nextDouble();
+        }
 
-    public void setAcc_num(int acc_num) {
-        this.acc_num = acc_num;
-    }
+        try{
+            checkAmount(amount);
+            System.out.println("Your Transaction is successful!");
+        }
+        catch (NegativeAmountException e){
+            System.out.println(e);
+            System.out.println("Please enter positive ammount");
+        }
 
-    public int getBalance() {
-        return balance;
     }
-
-    public void setBalance(int balance) {
-        this.balance = balance;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-   public void checkbalance()
-   {
-       System.out.println("Your balance is: "+balance);
-   }
-   public void deposite(int dep_ammount)
-   {
-       balance = balance + dep_ammount;
-       System.out.println("Deposite completed ");
-   }
-   public void withdraw(int with_ammount)
-   {
-   if(balance>with_ammount)
-   {
-   balance = balance - with_ammount;
-       System.out.println("withdraw successfull");
-   }
-   else
-           System.out.println("Insufficiant balance");
-   }
-   public String toString()
-   {
-       return "toString method "+name + " "+ acc_num + " "+balance;
-   }
 }
